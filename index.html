@@ -8,9 +8,10 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="http://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="./assets/normalize.css">
-  <link rel="stylesheet" href="./assets/skeleton.css">
-  <link rel="stylesheet" href="./assets/website.css">
+  <link rel="stylesheet" href="/assets/fontello/css/cf.css">
+  <link rel="stylesheet" href="/assets/normalize.css">
+  <link rel="stylesheet" href="/assets/skeleton.css">
+  <link rel="stylesheet" href="/assets/website.css">
 
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -51,21 +52,12 @@
 </head>
 <body>
   <div id="fb-root"></div>
-  <script>
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.5&appId=939977049401016";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
 
   <div class="container">
     <section class="header">
       <h1 class="title"><img src="./assets/logo.png" alt="Ractive-Require" title="Ractive-Require" /></h1>
       <h2>Require Ractive views on demand in Package by Feature way!</h2>
-      <a class="button button-primary" href="https://github.com/CodeCorico/ractive-require/archive/0.1.0.zip" target="_blank">Download (0.1)</a>
+      <a class="button button-primary" href="https://github.com/CodeCorico/ractive-require/archive/0.5.0.zip" target="_blank">Download (0.5)</a>
       <a class="button" href="https://github.com/CodeCorico/ractive-require" target="_blank">GitHub project</a>
 
       <div class="sharing">
@@ -78,64 +70,409 @@
       </div>
     </section>
 
-    <nav class="navbar" id="navbar">
-      <div class="container">
-        <ul class="navbar-list">
-          <li class="navbar-item"><a class="navbar-link" href="#intro">Intro</a></li>
-          <li class="navbar-item"><a class="navbar-link" href="#more">More</a></li>
+    <div class="row" id="container">
+      <div class="three columns" id="navigation">
+        <ul>
+          <li class="title-1-container"><a class="title-1" href="#what-is-it">What is it?</a></li>
+          <li class="title-1-container"><a class="title-1" href="#project">The project</a></li>
+          <li class="title-1-container"><a class="title-1" href="#installation">Installation</a></li>
+          <li class="title-1-container">
+            <a class="title-1" href="#use-it">Use it</a>
+
+            <ul>
+              <li class="title-2-container"><a class="title-2" href="#require-a-feature">Require a feature</a></li>
+              <li class="title-2-container"><a class="title-2" href="#require-a-file">Require a file</a></li>
+              <li class="title-2-container"><a class="title-2" href="#control-a-feature">Control a feature</a></li>
+              <li class="title-2-container"><a class="title-2" href="#cache">Cache</a></li>
+              <li class="title-2-container"><a class="title-2" href="#only-html">Only HTML</a></li>
+              <li class="title-2-container"><a class="title-2" href="#on-demand">On demand</a></li>
+              <li class="title-2-container"><a class="title-2" href="#passing-arguments">Passing arguments</a></li>
+              <li class="title-2-container"><a class="title-2" href="#partials">Partials</a></li>
+              <li class="title-2-container"><a class="title-2" href="#sub-requires">Sub requires</a></li>
+              <li class="title-2-container"><a class="title-2" href="#scopes">Scopes</a></li>
+              <li class="title-2-container"><a class="title-2" href="#paths">Paths</a></li>
+              <li class="title-2-container"><a class="title-2" href="#teardown">Teardown</a></li>
+            </ul>
+          </li>
         </ul>
       </div>
-    </nav>
+      <div class="nine columns" id="content">
 
-    <div class="docs-section" id="intro">
-      <h6 class="docs-header">Intro</h6>
+        <!-- WHAT IS IT -->
 
-      <div class="row">
-        <div class="four columns">
-          <h2>...</h2>
-          <p>
-            ...
-          </p>
-        </div>
-        <div class="four columns">
-          <h2>...</h2>
-          <p>
-            ...
-          </p>
-        </div>
-         <div class="four columns">
-          <h2>...</h2>
-          <p>
-            ...
-          </p>
-        </div>
-      </div>
-    </div>
+        <h2>
+          <a id="what-is-it" class="anchor" href="#what-is-it" aria-hidden="true"><span class="icon-link"></span></a>
+          What is it?
+        </h2>
 
-    <div class="docs-section" id="more">
-      <h6 class="docs-header">More</h6>
+        <blockquote>
+          <p><em>
+          <a href="http://http://www.ractivejs.org/" target="_blank">Ractive.js</a> is a template-driven UI library, but unlike other tools that generate inert HTML, it transforms your templates into blueprints for apps that are interactive by default.
+          </em></p>
+        </blockquote>
 
-      <div class="row">
-        <div class="two columns">
-          <img src="./assets/CodeCorico.png" alt="CodeCorico" />
+        <p>
+          Ractive-Require is an extension to Ractive.js that provides the support to require features on demand. A feature is composed by a HTML template file, and its JavaScript and CSS assets. They are not loaded on the page as long as the user does't need to use it.
+        </p>
+
+        <p>The final goal is to create large webapps that loads and uses features only when necessary.</p>
+
+        <!-- THE PROJECT -->
+
+        <h2>
+          <a id="project" class="anchor" href="#project" aria-hidden="true"><span class="icon-link"></span></a>
+          The project
+        </h2>
+
+        <div class="row">
+          <div class="two columns">
+            <img src="/assets/CodeCorico.png" alt="CodeCorico" />
+          </div>
+
+          <div class="ten columns">
+            <p>The project is maintened by an enthusiast community. They work together on enhancing the engine by making new features, fixes and more on GitHub.</p>
+            <ul>
+              <li><a href="https://github.com/CodeCorico/ractive-require/blob/master/CONTRIBUTING.md" target="_blank">Join the contribution team and be part of the CodeCorico Community!</a></li>
+              <li>
+                <a href="https://gitter.im/CodeCorico/ractive-require?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge">
+                  <img
+                    src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667"
+                    alt="Discussion chat"
+                    data-canonical-src="https://badges.gitter.im/Join%20Chat.svg"
+                    style="max-width:100%;"
+                  />
+                </a>
+              </li>
+              <li><a href="https://twitter.com/CodeCoricoTeam" target="_blank">Follow the CodeCorico team on Twitter</a></li>
+              <li><a href="https://github.com/CodeCorico/ractive-require/blob/master/LICENSE">Licence</a></li>
+              <li><a href="https://github.com/CodeCorico/ractive-require/blob/master/CHANGELOG.md">Changelog</a></li>
+              <li><a href="https://github.com/CodeCorico/ractive-require/issues/milestones?state=open">Milestones</a></li>
+            </ul>
+          </div>
         </div>
 
-        <div class="ten columns">
-          <p>The project is maintened by an enthusiast community. They work together on enhancing the engine by making new features, fixes and more on GitHub.</p>
-          <ul>
-            <li><a href="https://github.com/CodeCorico/ractive-require/blob/master/CONTRIBUTING.md" target="_blank">Join the contribution team and be part of the CodeCorico Community!</a></li>
-            <li><a href="https://gitter.im/CodeCorico/ractive-require?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://camo.githubusercontent.com/da2edb525cde1455a622c58c0effc3a90b9a181c/68747470733a2f2f6261646765732e6769747465722e696d2f4a6f696e253230436861742e737667" alt="Discussion chat" data-canonical-src="https://badges.gitter.im/Join%20Chat.svg" style="max-width:100%;"></a></li>
-            <li><a href="https://twitter.com/CodeCoricoTeam" target="_blank">Follow the CodeCorico team on Twitter</a></li>
-          </ul>
+        <h2>
+          <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="icon-link"></span></a>
+          Installation
+        </h2>
+
+        <p>Use the CDN version:</p>
+
+        <div class="highlight highlight-text-html-basic">
+          <pre>&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://cdnjs.cloudflare.com/ajax/libs/ractive-require/0.5.0/ractive-require.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre>
         </div>
+
+        <p>
+          Or copy the <a href="https://github.com/CodeCorico/ractive-require/tree/master/dist" target="_blank">dist</a> folder into your project and include <code>ractive-require.js</code> or <code>ractive-require.min.js</code> (production) file in your HTML page <strong>after</strong> Ractive.
+        </p>
+
+        <h2>
+          <a id="use-it" class="anchor" href="#use-it" aria-hidden="true"><span class="icon-link"></span></a>
+          Use it
+        </h2>
+
+        <h3 class="h-no-top">
+          <a id="require-a-feature" class="anchor" href="require-a-feature" aria-hidden="true"><span class="icon-link"></span></a>
+          Require a feature
+        </h3>
+
+        <p>To require a feature, use the HTML tag <code>&lt;rv-require&gt;</code> in your page with a <em>name</em> and a <em>src</em>:</p>
+
+        <div class="highlight highlight-text-html-basic">
+          <pre>&lt;<span class="pl-ent">body</span>&gt;
+
+  &lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/button<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+
+&lt;/<span class="pl-ent">body</span>&gt;</pre>
+        </div>
+
+        <p>The missing file extension is assumed. It will be discussed later.</p>
+
+        <p>At this point, nothing happens, the feature is loaded <strong>on demand</strong>.</p>
+
+        <p>To fire the feature, you have to use the Ractive container view:</p>
+
+        <div class="highlight highlight-source-js">
+          <pre><span class="pl-c">// Create a view from the &lt;body&gt; element</span>
+<span class="pl-k">var</span> ractive <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Ractive</span>({
+  el<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>body<span class="pl-pds">'</span></span>,
+  template<span class="pl-k">:</span> <span class="pl-c1">document</span>.<span class="pl-c1">body</span>.innerHTML
+});
+
+<span class="pl-c">// Call the require() method to fire the rv-require injection</span>
+ractive.require().then(<span class="pl-k">function</span>() {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>done<span class="pl-pds">'</span></span>);
+});</pre>
+        </div>
+
+        <p>Firstly, Ractive-Require adds to the <code>&lt;head&gt;</code> element:</p>
+
+        <ul>
+          <li><code>components/button.css</code></li>
+          <li><code>components/button.js</code></li>
+        </ul>
+
+        <p>Then it register the <code>components/button.html</code> template in its memory. The feature is loaded.</p>
+
+        <p>In the <code>&lt;rv-require&gt;</code> src attrbute we don't set the extension because Ractive-Require will load 3 different types of files</p>
+
+        <p>The HTML template will still continues to be a Mustache template with data-binding, but for now, it's just a string.</p>
+
+        <h3>
+          <a id="require-a-file" class="anchor" href="require-a-file" aria-hidden="true"><span class="icon-link"></span></a>
+          Require a file
+        </h3>
+
+        <p>In your JavaScript files, you can require an other JavaScript file or a CSS file. Just continue to use <code>Ractive.require()</code> but with a file path:</p>
+
+        <div class="highlight highlight-source-js">
+          <pre><span class="pl-c">// Inject the js file</span>
+Ractive.require(<span class="pl-s"><span class="pl-pds">'</span>/public/jquery.js<span class="pl-pds">'</span></span>);
+
+<span class="pl-c">// The return is a Promise</span>
+Ractive.require(<span class="pl-s"><span class="pl-pds">'</span>/public/jquery.js<span class="pl-pds">'</span></span>).then(<span class="pl-k">function</span>() {
+  <span class="pl-c">// ...</span>
+});
+
+<span class="pl-c">// You can add a name to avoid many injections of the same file.</span>
+<span class="pl-c">// Otherwise, it's the filename wich is used as name.</span>
+Ractive.require(<span class="pl-s"><span class="pl-pds">'</span>jquery<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>/public/jquery.js<span class="pl-pds">'</span></span>);
+
+<span class="pl-c">// It works for JS and CSS files</span>
+Ractive.require(<span class="pl-s"><span class="pl-pds">'</span>/public/styles.css<span class="pl-pds">'</span></span>);</pre>
+        </div>
+
+        <h3>
+          <a id="control-a-feature" class="anchor" href="control-a-feature" aria-hidden="true"><span class="icon-link"></span></a>
+          Control a feature
+        </h3>
+
+        <p>When a <code>&lt;rv-require&gt;</code> is loaded, a <code>Ractive.controller</code> is fired. You can wrap it for your feature to get the feature definition and other things:</p>
+
+        <div class="highlight highlight-source-js">
+          <pre><span class="pl-c">// Declare a controller for "button"</span>
+Ractive.controller(<span class="pl-s"><span class="pl-pds">'</span>button<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">Feature</span>, <span class="pl-smi">data</span>, <span class="pl-smi">el</span>, <span class="pl-smi">config</span>, <span class="pl-smi">done</span>) {
+
+  <span class="pl-c">// Like a standard component, "Feature" is a pre-configured view</span>
+  <span class="pl-c">// It already contains template, partials and the destination element</span>
+  <span class="pl-k">var</span> ractive <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Feature</span>({
+    data<span class="pl-k">:</span> data
+  });
+
+  <span class="pl-c">// You can get the pre-configured details with the "config" object</span>
+
+  <span class="pl-c">// When your controller logic is complete, call done()</span>
+  <span class="pl-c">// because it's possible to declare many controllers for the same feature</span>
+  done();
+
+});</pre>
+        </div>
+
+        <p>Now your feature is totally applied in the DOM and you have its control!</p>
+
+        <h3>
+          <a id="cache" class="anchor" href="cache" aria-hidden="true"><span class="icon-link"></span></a>
+          Cache
+        </h3>
+
+        <p>Each feature template is cached by its name. If you declare:</p>
+
+        <div class="highlight highlight-text-html-basic">
+          <pre>&lt;<span class="pl-ent">body</span>&gt;
+
+  &lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/button<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+  &lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/button<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+
+ &lt;/<span class="pl-ent">body</span>&gt;</pre>
+        </div>
+
+        <p>The second <em>button</em> does not reload the JavasScript and CSS files in the head and it re-use the template content previously loaded.</p>
+
+        <h3>
+          <a id="only-html" class="anchor" href="only-html" aria-hidden="true"><span class="icon-link"></span></a>
+          Only HTML
+        </h3>
+
+        <p>To avoid loading the CSS or JavaScript files, you can add <code>no-script="true"</code> and/or <code>no-css="true"</code>:</p>
+
+        <div class="highlight highlight-text-html-basic">
+          <pre>&lt;<span class="pl-ent">body</span>&gt;
+
+  &lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/button<span class="pl-pds">"</span></span> <span class="pl-e">no-script</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span> <span class="pl-e">no-css</span>=<span class="pl-s"><span class="pl-pds">"</span>true<span class="pl-pds">"</span></span>&gt;
+  &lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+
+&lt;/<span class="pl-ent">body</span>&gt;</pre>
+        </div>
+
+        <h3>
+          <a id="on-demand" class="anchor" href="on-demand" aria-hidden="true"><span class="icon-link"></span></a>
+          On demand
+        </h3>
+
+        <p>
+          With <code>Ractive.require()</code> all of the <code>&lt;rv-require&gt;</code> are fired.
+          To have the ability to require only some of features, you can use the <code>ondemand</code> parameter:
+        </p>
+
+        <div class="highlight highlight-text-html-basic">
+          <pre>&lt;<span class="pl-ent">body</span>&gt;
+
+  &lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/button<span class="pl-pds">"</span></span> <span class="pl-e">ondemand</span>=<span class="pl-s"><span class="pl-pds">"</span>button1<span class="pl-pds">"</span></span>&gt;
+  &lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+
+&lt;/<span class="pl-ent">body</span>&gt;</pre>
+        </div>
+
+        <p><code>Ractive.require()</code> has no effect on the button. To fire it, you have to specify <code>Ractive.require('button1')</code>.</p>
+
+        <p>With the same ondemand attribute value, you can make groups of features loaded together.</p>
+
+        <h3>
+          <a id="passing-arguments" class="anchor" href="passing-arguments" aria-hidden="true"><span class="icon-link"></span></a>
+          Passing arguments
+        </h3>
+
+        <p>You can pass two types of arguments in a <code>&lt;rv-require&gt;</code>:</p>
+
+        <ul>
+          <li>Direct value with the <code>data-*</code> parameter.</li>
+          <li>Binding value of the parent view with the <code>data-bind-*</code> parameter.</li>
+        </ul>
+
+        <p>The <code>*</code> is the property name getted in <em>data</em>.</p>
+
+        <div class="highlight highlight-text-html-basic">
+          <pre>&lt;<span class="pl-ent">body</span>&gt;
+
+  &lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/button<span class="pl-pds">"</span></span> <span class="pl-e">data-id</span>=<span class="pl-s"><span class="pl-pds">"</span>5<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+  &lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/button<span class="pl-pds">"</span></span> <span class="pl-e">data-bind-id</span>=<span class="pl-s"><span class="pl-pds">"</span>model.id<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+
+&lt;/<span class="pl-ent">body</span>&gt;</pre>
+        </div>
+
+        <div class="highlight highlight-source-js">
+          <pre>Ractive.controller(<span class="pl-s"><span class="pl-pds">'</span>button<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">Feature</span>, <span class="pl-smi">data</span>, <span class="pl-smi">el</span>, <span class="pl-smi">config</span>, <span class="pl-smi">done</span>) {
+
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(data.<span class="pl-c1">id</span>);
+
+  <span class="pl-c">// With the first button, data.id gets the 5 direct value.</span>
+  <span class="pl-c">// With the second, data.id gets the value of the parent view "ractive.data.model.id"</span>
+  <span class="pl-c">// If the parent value "model.id" changes, the value is directly changed in the child too.</span>
+  <span class="pl-c">// If you pass an object, it will not be cloned but directly sent.</span>
+
+});
+          </pre>
+        </div>
+
+        <h3>
+          <a id="partials" class="anchor" href="partials" aria-hidden="true"><span class="icon-link"></span></a>
+          Partials
+        </h3>
+
+        <p>
+          It's possible to define partials for a <code>&lt;rv-require&gt;</code> that are used only on it.
+          A partial is a <code>&lt;rv-partial&gt;</code> element defined inside the <code>&lt;rv-require&gt;</code>.
+          It can takes a <code>src</code> attribute or directly a HTML code. It must have a <code>target</code>
+          attribute with the name of the partial Mustache tag.
+        </p>
+
+        <p>If no partial is defined in the <code>&lt;rv-require&gt;</code>, it takes the parent partial inclusion.</p>
+
+        <p>Inside the feature template, use the standard <code>{{&gt; partial}}</code> partial include:</p>
+
+        <div class="highlight highlight-text-html-basic">
+          <pre>&lt;<span class="pl-ent">body</span>&gt;
+
+  &lt;<span class="pl-ent">script</span> <span class="pl-e">type</span>=<span class="pl-s"><span class="pl-pds">"</span>text/ractive<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">div</span>&gt;My generic content&lt;/<span class="pl-ent">div</span>&gt;
+  &lt;/<span class="pl-ent">script</span>&gt;
+
+  &lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/button<span class="pl-pds">"</span></span>&gt;
+
+    <span class="pl-c">&lt;!-- A partial can be a HTML page --&gt;</span>
+    &lt;<span class="pl-ent">rv</span><span class="pl-e">-partial</span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>content<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/content.html<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">rv</span><span class="pl-e">-partial</span>&gt;
+
+    <span class="pl-c">&lt;!-- Or a direct HTML content --&gt;</span>
+    &lt;<span class="pl-ent">rv</span><span class="pl-e">-partial</span> <span class="pl-e">target</span>=<span class="pl-s"><span class="pl-pds">"</span>footer<span class="pl-pds">"</span></span>&gt;
+      &lt;<span class="pl-ent">div</span>&gt;The footer&lt;/<span class="pl-ent">div</span>&gt;
+    &lt;/<span class="pl-ent">rv</span><span class="pl-e">-partial</span>&gt;
+
+  &lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+
+  <span class="pl-c">&lt;!-- No "content" partial defined for this button, so it takes the parent script --&gt;</span>
+  &lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/button<span class="pl-pds">"</span></span>&gt;
+  &lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+
+&lt;/<span class="pl-ent">body</span>&gt;</pre>
+        </div>
+
+        <h3>
+          <a id="sub-requires" class="anchor" href="sub-requires" aria-hidden="true"><span class="icon-link"></span></a>
+          Sub requires
+        </h3>
+
+        <p>
+          Inside a feature or partial template, it's possible to call other features. It works exactly the same as require a feature
+          in the page, you have to call <code>ractive.require()</code> for the parent feature.
+        </p>
+
+        <p>The sub-feature starts with the partials of its parent.</p>
+
+        <h3>
+          <a id="scopes" class="anchor" href="scopes" aria-hidden="true"><span class="icon-link"></span></a>
+          Scopes
+        </h3>
+
+        <p>Each <code>&lt;rv-require&gt;</code> has its own scope. When you call <code>ractive.require()</code> it doesn't look at the DOM parent or the children of the <code>&lt;rv-require&gt;</code> on it.</p>
+
+        <p>When you create your feature with <code>ractive = new Feature()</code>, <em>ractive</em> contains two new properties:</p>
+
+        <ul>
+          <li><em>ractive.parentRequire</em>: Instance of the parent feature.</li>
+          <li><em>ractive.childrenRequire</em>: Array with all of the children features.</li>
+        </ul>
+
+        <h3>
+          <a id="paths" class="anchor" href="#-paths" aria-hidden="true"><span class="icon-link"></span></a>
+          Paths
+        </h3>
+
+        <p>In a feature or partial template, all of the next <code>src</code> attributes of the <code>&lt;rv-require&gt;</code> and <code>&lt;rv-partial&gt;</code> elements are relative of the actual file:</p>
+
+        <div class="highlight highlight-text-html-basic">
+          <pre><span class="pl-c">&lt;!-- /index.html --&gt;</span>
+
+&lt;<span class="pl-ent">body</span>&gt;
+  &lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>button<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>components/button<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+&lt;/<span class="pl-ent">body</span>&gt;
+
+<span class="pl-c">&lt;!-- /components/button.html --&gt;</span>
+
+<span class="pl-c">&lt;!-- "src" start at /components/ --&gt;</span>
+&lt;<span class="pl-ent">rv</span><span class="pl-e">-require</span> <span class="pl-e">name</span>=<span class="pl-s"><span class="pl-pds">"</span>icon<span class="pl-pds">"</span></span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>icon<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">rv</span><span class="pl-e">-require</span>&gt;
+
+<span class="pl-c">&lt;!-- /components/icon.html --&gt;</span>
+
+&lt;<span class="pl-ent">div</span>&gt;Icon&lt;/<span class="pl-ent">div</span>&gt;</pre>
+        </div>
+
+        <h3>
+          <a id="teardown" class="anchor" href="teardown" aria-hidden="true"><span class="icon-link"></span></a>
+          Teardown
+        </h3>
+
+        <p>When you fire a <code>ractive.teardown()</code> of a feature, it fires all of its children teardown after it cleans the DOM.</p>
+
+        <p>Your <code>&lt;rv-require&gt;</code> is reseted but still on the DOM. So you can re-use <code>.require()</code> on its parent to re-fire its controller.</p>
+
       </div>
     </div>
 
   </div>
 
-  <script src="https://apis.google.com/js/platform.js" async defer>
-    {lang: 'fr'}
-  </script>
-
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="/assets/index.js"></script>
+  <!--script src="//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.5&appId=939977049401016" id="facebook-jssdk"></script-->
+  <script src="https://apis.google.com/js/platform.js" async defer>{lang: 'fr'}</script>
 </body>
 </html>
