@@ -79,6 +79,12 @@
   font-size: 3rem;
 }
 
+.fb-share-button {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 4px;
+}
+
 .lv-item {
   height: 34px;
   margin-bottom: 0;
