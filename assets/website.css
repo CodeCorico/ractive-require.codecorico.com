@@ -7,6 +7,10 @@ body {
   overflow: auto;
 }
 
+.navbar-item a {
+  cursor: pointer;
+}
+
 #container {
   position: relative;
 }
@@ -67,7 +71,7 @@ body {
   padding-top: 0;
 }
 
-.container {
+body > .container {
   max-width: 924px;
 }
 
@@ -184,8 +188,6 @@ h2 .anchor, h3 .anchor {
 }
 
 h1:hover .anchor, h2:hover .anchor, h3:hover .anchor, h4:hover .anchor, h5:hover .anchor, h6:hover .anchor {
-  padding-left: 8px;
-  margin-left: -70px;
   text-decoration: none;
 }
 
@@ -196,6 +198,82 @@ h4:hover .anchor .icon-link,
 h5:hover .anchor .icon-link,
 h6:hover .anchor .icon-link {
   display: inline-block;
+}
+
+.container-example {
+  position: relative;
+  overflow: hidden;
+}
+
+.container-example .content-example {
+  top: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
+}
+
+.example-view {
+  position: relative;
+  border: 1px solid #ececec;
+  padding: 5.2rem 1rem 1rem;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.example-view:before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4.2rem;
+  background: #ececec url("browser-icons.png") no-repeat 1.4rem 1.2rem;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.example-dom {
+  margin-top: -2px;
+  position: relative;
+  border: 1px solid #ececec !important;
+  border-top-color: #333 !important;
+  padding: 3.2rem 1rem 1rem !important;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.example-dom:before {
+  content: "DOM";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2.2rem;
+  background: #ececec;
+  padding-left: 0.5rem;
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
+
+@media (max-width: 1038px) {
+  body > .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 888px) {
+  #navigation, #navigation.fixed {
+    position: relative;
+    width: 100%;
+    height: auto !important;
+  }
+
+  #content {
+    margin: 0;
+    width: 100%;
+  }
 }
 
 @media (min-width: 550px) {
@@ -369,13 +447,14 @@ blockquote {
   margin-left: 1rem;
 }
 
-.highlight pre {
+.highlight pre, .highlight pre.prettyprint {
   padding: 16px;
   overflow: auto;
   font-size: 85%;
   line-height: 1.45;
   background-color: #f7f7f7;
   border-radius: 3px;
+  border: none;
 }
 
 .highlight {
