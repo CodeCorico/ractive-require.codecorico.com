@@ -1,3 +1,9 @@
+@-webkit-keyframes pulsate { 0% { -webkit-transform: scale(0.1, 0.1); opacity: 0; } 50% {opacity: 1;} 100% { -webkit-transform: scale(1.2, 1.2); opacity: 0; } }
+@-moz-keyframes pulsate { 0% { -moz-transform: scale(0.1, 0.1); opacity: 0; } 50% {opacity: 1;} 100% { -moz-transform: scale(1.2, 1.2); opacity: 0; } }
+@-ms-keyframes pulsate { 0% { -ms-transform: scale(0.1, 0.1); opacity: 0; } 50% {opacity: 1;} 100% { -ms-transform: scale(1.2, 1.2); opacity: 0; } }
+@-o-keyframes pulsate { 0% { -o-transform: scale(0.1, 0.1); opacity: 0; } 50% {opacity: 1;} 100% { -o-transform: scale(1.2, 1.2); opacity: 0; } }
+@keyframes pulsate { 0% { transform: scale(0.1, 0.1); opacity: 0; } 50% {opacity: 1;} 100% { transform: scale(1.2, 1.2); opacity: 0; } }
+
 html, body {
   height: 100%;
   position: relative;
@@ -240,6 +246,7 @@ h6:hover .anchor .icon-link {
   padding: 3.2rem 1rem 1rem !important;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+  overflow-y: visible !important;
 }
 
 .example-dom:before {
@@ -253,6 +260,68 @@ h6:hover .anchor .icon-link {
   padding-left: 0.5rem;
   font-size: 1.2rem;
   line-height: 2rem;
+}
+
+.example-dom-comment {
+  position: absolute;
+}
+
+.example-dom-comment-content {
+  display: none;
+}
+
+.example-dom-comment-content.opened {
+  display: block;
+}
+
+.example-dom-comment-button {
+  z-index: 1;
+  position: relative;
+  background: white;
+  border-radius: 50%;
+  height: 2.4rem;
+  width: 2.4rem;
+  border: 0;
+  float: left;
+  box-shadow: 0 0 1rem #666;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  line-height: 2.6rem;
+}
+
+.example-dom-comment-button:before {
+  z-index: -1;
+  position: absolute;
+  background: transparent;
+  border-radius: 50%;
+  border: 0;
+  box-shadow: 0 0 1rem #666;
+  content: "";
+  background: white;
+  height: 3.2rem;
+  width: 3.2rem;
+  display: block;
+  left: -0.4rem;
+  top: -0.4rem;
+  padding: 0;
+  margin: 0;
+  -webkit-animation: pulsate 1.5s infinite ease-out;
+  -moz-animation: pulsate 1.5s infinite ease-out;
+  -ms-animation: pulsate 1.5s infinite ease-out;
+  -o-animation: pulsate 1.5s infinite ease-out;
+  animation: pulsate 1.5s infinite ease-out;
+}
+
+.example-dom-comment-content {
+  position: absolute;
+  left: 2rem;
+  background: #333;
+  color: white;
+  padding: 0.2em 0.7em;
+  top: -0.3em;
+  border-radius: 1rem;
+  white-space: nowrap;
 }
 
 @media (max-width: 1038px) {

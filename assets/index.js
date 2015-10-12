@@ -34,17 +34,47 @@ $(function() {
   }
 
   function _updateExampleDOM($dom, content) {
-    $dom.html(_escapeHtml(content));
+    $dom.html(_escapeHtml(content.html));
     $dom.removeClass('prettyprinted');
 
     window.PR.prettyPrint();
 
-    var $container = $dom.parents('.container-example');
-    if (!$container.length) {
+    $dom.html($.trim($dom.html()));
+
+    var $containerExample = $dom.parents('.container-example');
+    if (!$containerExample.length) {
       return;
     }
 
-    _resizeContainerExample($container);
+    var $contentExample = $dom.parents('.content-example');
+    if (!$contentExample.length) {
+      return;
+    }
+
+    $contentExample.find('.example-dom-comment').remove();
+
+    if (content.comments && content.comments.length) {
+      $.each(content.comments, function(i, comment) {
+        var $content = $('<div />')
+          .addClass('example-dom-comment')
+          .css({
+            top: comment.top,
+            left: comment.left
+          })
+          .html([
+            '<button class="example-dom-comment-button">' + comment.number + '</button>',
+            '<div class="example-dom-comment-content">' + comment.html + '</div>'
+          ]);
+
+        $content.find('.example-dom-comment-button').click(function() {
+          $content.find('.example-dom-comment-content').toggleClass('opened');
+        });
+
+        $contentExample.append($content);
+      });
+    }
+
+    _resizeContainerExample($containerExample);
   }
 
   function _resizeContainerExample($container) {
@@ -88,47 +118,146 @@ $(function() {
       }),
       $basicsPageDOM = $('#example-basics .example-dom'),
       basicsDOMTemplates = {
-        initial: [
-          '<div id="basics-page">\n\n',
-          '  <h4>Here is a page</h4>\n',
-          '  <button id="basics-help">Open the help</button>\n\n',
-          '  <rv-require name="help" src="views/help"></rv-require>\n\n',
-          '</div>'
-        ].join(''),
+        initial: {
+          html: [
+            '<head>\n',
+            '  ...\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="basics-help">Open the help</button>\n',
+            '  <button id="basics-reset">Reset the example</button>\n\n',
+            '  <rv-require name="help" src="views/help"></rv-require>\n\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 1,
+            top: 467,
+            left: 28,
+            html: [
+              'Use this tag to add content can be loaded on demand.'
+            ].join('')
+          }, {
+            number: 2,
+            top: 120,
+            left: 184,
+            html: [
+              'Click to call the .require() method and<br />load all the rv-require elements.'
+            ].join('')
+          }]
+        },
 
-        opened: [
-          '<div id="basics-page">\n\n',
-          '  <h4>Here is a page</h4>\n',
-          '  <button id="basics-help">Close the help</button>\n\n',
-          '  <rv-require name="help" src="views/help" class="rv-require-loaded" loaded="true">\n',
-          '    <div class="help">\n',
-          '      <h4>HELP</h4>\n',
-          '      <p>Help content</p>\n',
-          '    </div>\n',
-          '  </rv-require>\n\n',
-          '</div>'
-        ].join('')
+        opened: {
+          html: [
+            '<head>\n',
+            '  <link rel="stylesheet" href="views/help.css">\n',
+            '  <script type="text/javascript" src="views/help.js"></script>\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="basics-help">Close the help</button>\n',
+            '  <button id="basics-reset">Reset the example</button>\n\n',
+            '  <rv-require name="help" src="views/help" class="rv-require-loaded" loaded="true">\n',
+            '    <div class="help">\n',
+            '      <h4>HELP</h4>\n',
+            '      <p>Help content</p>\n',
+            '    </div>\n',
+            '  </rv-require>\n\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 3,
+            top: 327,
+            left: 167,
+            html: [
+              'The element assets and HTML are loaded<br />then the "help" controller is called.'
+            ].join('')
+          }, {
+            number: 4,
+            top: 492,
+            left: 204,
+            html: [
+              'When the "help" controller is called,<br />it create its Ractive element.'
+            ].join('')
+          }, {
+            number: 5,
+            top: 120,
+            left: 184,
+            html: [
+              'Click to call the .teardown() method and<br />destroy your Rractive element.'
+            ].join('')
+          }]
+        },
+
+        teardowned: {
+          html: [
+            '<head>\n',
+            '  <link rel="stylesheet" href="views/help.css">\n',
+            '  <script type="text/javascript" src="views/help.js"></script>\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="basics-help">Open the help</button>\n',
+            '  <button id="basics-reset">Reset the example</button>\n\n',
+            '  <rv-require name="help" src="views/help"></rv-require>\n\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 6,
+            top: 327,
+            left: 167,
+            html: [
+              'The element assets and HTML are kept in memory.'
+            ].join('')
+          }, {
+            number: 7,
+            top: 490,
+            left: 28,
+            html: [
+              'The content is deleted and the tag reseted.'
+            ].join('')
+          }, {
+            number: 8,
+            top: 120,
+            left: 184,
+            html: [
+              'You can retry the process any times you want.'
+            ].join('')
+          }]
+        }
       };
 
   _updateExampleDOM($basicsPageDOM, basicsDOMTemplates.initial);
 
-  $('#basics-help').click(function() {
+  $('#basics-reset').click(function() {
     var opened = $('#basics-help').data('opened') || false;
 
     if (opened) {
       BasicsPage.childrenRequire[0].teardown();
       $('#basics-help').html('Open the help');
       $('#basics-help').data('opened', false);
-
-      _updateExampleDOM($basicsPageDOM, basicsDOMTemplates.initial);
     }
-    else {
-      BasicsPage.require().then(function() {
-        $('#basics-help').html('Close the help');
-        $('#basics-help').data('opened', true);
 
+    _updateExampleDOM($basicsPageDOM, basicsDOMTemplates.initial);
+  });
+
+  $('#basics-help').click(function() {
+    var opened = $('#basics-help').data('opened') || false;
+
+    opened = !opened;
+
+    $('#basics-help')
+      .data('opened', opened)
+      .html(opened ? 'Close the help' : 'Open the help');
+
+    if (opened) {
+      BasicsPage.require().then(function() {
         _updateExampleDOM($basicsPageDOM, basicsDOMTemplates.opened);
       });
+    }
+    else {
+      BasicsPage.childrenRequire[0].teardown();
+      _updateExampleDOM($basicsPageDOM, basicsDOMTemplates.teardowned);
     }
   });
 

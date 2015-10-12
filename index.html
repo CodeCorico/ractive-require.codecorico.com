@@ -208,12 +208,14 @@
         <div class="container-example" id="example-basics">
           <div class="content-example" id="example-basics-1">
 
+
             <div class="example-view">
 
               <div id="basics-page">
 
                 <h4>Here is a page</h4>
-                <button id="basics-help">Open the help</button>
+                <button id="basics-help">Open the help</button><br />
+                <button id="basics-reset">Reset the example</button>
 
                 <rv-require name="help" src="views/help"></rv-require>
 
@@ -225,19 +227,89 @@
           </div>
 
           <div class="content-example" id="example-basics-2">
+            <div class="highlight">
+              <pre class="prettyprint">$('#basics-help').click(function() {
+  var opened = $('#basics-help').data('opened') || false;
 
+  opened = !opened;
+
+  $('#basics-help')
+    .data('opened', opened)
+    .html(opened ? 'Close the help' : 'Open the help');
+
+  if (opened) {
+
+    // This loads all the rv-require elements
+    // It loads the element assets and HTML
+    // then it calls the controller of each element
+
+    BasicsPage.require();
+
+  }
+  else {
+
+    // We assume "BasicsPage" is a Ractive element
+    // When this element calls the .require() method
+    // it takes its children in the childrenRequire property
+
+    BasicsPage.childrenRequire[0].teardown();
+
+  }
+});</pre>
+            </div>
           </div>
 
           <div class="content-example" id="example-basics-3">
+            <div class="highlight">
+              <pre class="prettyprint"><div class="help">
+  <h4>HELP</h4>
 
+  <p>Help content</p>
+</div>
+</pre>
+            </div>
           </div>
 
           <div class="content-example" id="example-basics-4">
+            <div class="highlight">
+              <pre class="prettyprint">(function() {
+  'use strict';
 
+  // When the .require() is fired and after the load of the
+  // rv-require assets, the "help" controller is fire
+
+  window.Ractive.controller('help', function(component, data, el, config, done) {
+
+    // "component" is a magic function that create the Ractive element
+    // It uses the HTML template loaded and the target rv-require element
+    // to create the view.
+
+    var Help = component({
+      data: data
+    });
+
+    done();
+  });
+
+})();
+</pre>
+            </div>
           </div>
 
           <div class="content-example" id="example-basics-5">
-
+            <div class="highlight">
+              <pre class="prettyprint">.help {
+  position: absolute;
+  top: 4.2rem;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  border-left: 1px solid #ececec;
+  padding: 1rem;
+  background: white;
+}
+</pre>
+            </div>
           </div>
         </div>
 
