@@ -205,25 +205,25 @@ ractive.require().then(<span class="pl-k">function</span>() {
 });</pre>
         </div>
 
-        <p>Firstly, Ractive-Require adds to the <code>&lt;head&gt;</code> element:</p>
+        <p>First, Ractive-Require adds the following to the <code>&lt;head&gt;</code> element:</p>
 
         <ul>
           <li><code>components/button.css</code></li>
           <li><code>components/button.js</code></li>
         </ul>
 
-        <p>Then it register the <code>components/button.html</code> template in its memory. The feature is loaded.</p>
+        <p>Then it registers the <code>components/button.html</code> template in its memory. The feature is loaded.</p>
 
-        <p>In the <code>&lt;rv-require&gt;</code> src attrbute we don't set the extension because Ractive-Require will load 3 different types of files</p>
+        <p>In the <code>&lt;rv-require&gt;</code> src attribute the extension is not set because Ractive-Require will load 3 different types of files</p>
 
-        <p>The HTML template will still continues to be a Mustache template with data-binding, but for now, it's just a string.</p>
+        <p>The HTML template will still be a Mustache template with data-binding, but for now, it's just a string.</p>
 
         <h3>
           <a id="require-a-file" class="anchor" href="require-a-file" aria-hidden="true"><span class="icon-link"></span></a>
           Require a file
         </h3>
 
-        <p>In your JavaScript files, you can require an other JavaScript file or a CSS file. Just continue to use <code>Ractive.require()</code> but with a file path:</p>
+        <p>In your JavaScript files, you can require another JavaScript file or a CSS file. Just continue to use <code>Ractive.require()</code> but with a file path:</p>
 
         <div class="highlight highlight-source-js">
           <pre><span class="pl-c">// Inject the js file</span>
@@ -286,7 +286,7 @@ Ractive.controller(<span class="pl-s"><span class="pl-pds">'</span>button<span c
  &lt;/<span class="pl-ent">body</span>&gt;</pre>
         </div>
 
-        <p>The second <em>button</em> does not reload the JavasScript and CSS files in the head and it re-use the template content previously loaded.</p>
+        <p>The second <em>button</em> does not reload the JavasScript and CSS files in the head and it re-uses the template content previously loaded.</p>
 
         <h3>
           <a id="only-html" class="anchor" href="only-html" aria-hidden="true"><span class="icon-link"></span></a>
@@ -339,7 +339,7 @@ Ractive.controller(<span class="pl-s"><span class="pl-pds">'</span>button<span c
           <li>Binding value of the parent view with the <code>data-bind-*</code> parameter.</li>
         </ul>
 
-        <p>The <code>*</code> is the property name getted in <em>data</em>.</p>
+        <p>The <code>*</code> is the property name fetched in <em>data</em>.</p>
 
         <div class="highlight highlight-text-html-basic">
           <pre>&lt;<span class="pl-ent">body</span>&gt;
@@ -372,7 +372,7 @@ Ractive.controller(<span class="pl-s"><span class="pl-pds">'</span>button<span c
         <p>
           It's possible to define partials for a <code>&lt;rv-require&gt;</code> that are used only on it.
           A partial is a <code>&lt;rv-partial&gt;</code> element defined inside the <code>&lt;rv-require&gt;</code>.
-          It can takes a <code>src</code> attribute or directly a HTML code. It must have a <code>target</code>
+          It can take a <code>src</code> attribute or directly a HTML code. It must have a <code>target</code>
           attribute with the name of the partial Mustache tag.
         </p>
 
@@ -412,7 +412,7 @@ Ractive.controller(<span class="pl-s"><span class="pl-pds">'</span>button<span c
         </h3>
 
         <p>
-          Inside a feature or partial template, it's possible to call other features. It works exactly the same as require a feature
+          Inside a feature or partial template, it's possible to call other features. It works exactly the same as requiring a feature
           in the page, you have to call <code>ractive.require()</code> for the parent feature.
         </p>
 
@@ -463,7 +463,7 @@ Ractive.controller(<span class="pl-s"><span class="pl-pds">'</span>button<span c
 
         <p>When you fire a <code>ractive.teardown()</code> of a feature, it fires all of its children teardown after it cleans the DOM.</p>
 
-        <p>Your <code>&lt;rv-require&gt;</code> is reseted but still on the DOM. So you can re-use <code>.require()</code> on its parent to re-fire its controller.</p>
+        <p>Your <code>&lt;rv-require&gt;</code> is reseted but still in the DOM. So you can re-use <code>.require()</code> on its parent to re-fire its controller.</p>
 
       </div>
     </div>
