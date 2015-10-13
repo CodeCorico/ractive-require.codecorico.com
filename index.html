@@ -81,6 +81,7 @@
             <ul>
               <li class="title-2-container"><a class="title-2" href="#the-basics">The basics</a></li>
               <li class="title-2-container"><a class="title-2" href="#partials">Partials</a></li>
+              <li class="title-2-container"><a class="title-2" href="#databinding">Databinding</a></li>
             </ul>
           </li>
           <li class="title-1-container"><a class="title-1" href="#installation">Installation</a></li>
@@ -209,7 +210,6 @@
         <div class="container-example" id="example-basics">
           <div class="content-example" id="example-basics-1">
 
-
             <div class="example-view">
 
               <div id="basics-page">
@@ -332,7 +332,6 @@
         <div class="container-example" id="example-partials">
           <div class="content-example" id="example-partials-1">
 
-
             <div class="example-view">
 
               <div id="partials-page">
@@ -359,20 +358,20 @@
 
           <div class="content-example" id="example-partials-2">
             <div class="highlight">
-              <pre class="prettyprint">$('#basics-help').click(function() {
-  var opened = $('#basics-help').data('opened') || false;
+              <pre class="prettyprint">$('#partials-help').click(function() {
+  var opened = $('#partials-help').data('opened') || false;
 
   opened = !opened;
 
-  $('#basics-help')
+  $('#partials-help')
     .data('opened', opened)
     .html(opened ? 'Close the help' : 'Open the help');
 
   if (opened) {
-    BasicsPage.require();
+    PartialsPage.require();
   }
   else {
-    BasicsPage.childrenRequire[0].teardown();
+    PartialsPage.childrenRequire[0].teardown();
   }
 });</pre>
             </div>
@@ -424,6 +423,121 @@
   border-left: 1px solid #ececec;
   padding: 1rem;
   background: white;
+}
+</pre>
+            </div>
+          </div>
+        </div>
+
+        <h3>
+          <a id="databinding" class="anchor" href="#databinding" aria-hidden="true"><span class="icon-link"></span></a>
+          Databinding
+        </h3>
+
+        <nav class="navbar navbar-example">
+          <ul class="navbar-list">
+            <li class="navbar-item"><a class="navbar-link" data-target="example-databinding-1">Example</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-databinding-2">example.js</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-databinding-3">edition.html</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-databinding-4">edition.js</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-databinding-5">edition.css</a></li>
+          </ul>
+        </nav>
+
+        <div class="container-example" id="example-databinding">
+          <div class="content-example" id="example-databinding-1">
+
+            <div class="example-view">
+
+              <div id="databinding-page">
+
+                <h4>{{title}}</h4>
+                <button id="databinding-edit">Edit the title</button><br />
+                <button id="databinding-reset">Reset the example</button>
+
+                <rv-require
+                  name="edition"
+                  src="views/edition"
+
+                  data-drink="beer"
+                  data-bind-edittext="title"
+                ></rv-require>
+
+              </div>
+
+            </div>
+            <pre class="example-dom prettyprint"></pre>
+
+          </div>
+
+          <div class="content-example" id="example-databinding-2">
+            <div class="highlight">
+              <pre class="prettyprint">$('#databinding-edit').click(function() {
+  var opened = $('#databinding-edit').data('opened') || false;
+
+  opened = !opened;
+
+  $('#databinding-edit')
+    .data('opened', opened)
+    .html(opened ? 'Edit the title' : 'Close the edition');
+
+  if (opened) {
+    DatabindingPage.require();
+  }
+  else {
+    DatabindingPage.childrenRequire[0].teardown();
+  }
+});</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-databinding-3">
+            <div class="highlight">
+              <pre class="prettyprint"><div class="edition">
+  <h4>Edit the title</h4>
+  <p class="info">(and drink a {{drink}})</p>
+
+  <input type="text" value="{{edittext}}" />
+</div>
+</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-databinding-4">
+            <div class="highlight">
+              <pre class="prettyprint">(function() {
+  'use strict';
+
+  window.Ractive.controller('edition', function(component, data, el, config, done) {
+
+    var Edition = component({
+      data: data
+    });
+
+    done();
+  });
+
+})();
+</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-databinding-5">
+            <div class="highlight">
+              <pre class="prettyprint">.edition {
+  position: absolute;
+  top: 4.2rem;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  border-left: 1px solid #ececec;
+  padding: 1rem;
+  background: white;
+}
+
+.edition .info {
+  margin-top: -1.4rem;
+  font-size: 1.4rem;
 }
 </pre>
             </div>

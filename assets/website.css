@@ -274,7 +274,11 @@ h6:hover .anchor .icon-link {
   display: none;
 }
 
-.example-dom-comment-content.opened {
+.example-dom-comment.opened {
+  z-index: 2;
+}
+
+.example-dom-comment.opened .example-dom-comment-content {
   display: block;
 }
 
