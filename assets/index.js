@@ -184,7 +184,7 @@ $(function() {
             top: 120,
             left: 184,
             html: [
-              'Click to call the .teardown() method and<br />destroy your Rractive element.'
+              'Click to call the .teardown() method and<br />destroy your Ractive element.'
             ].join('')
           }]
         },
@@ -258,6 +258,160 @@ $(function() {
     else {
       BasicsPage.childrenRequire[0].teardown();
       _updateExampleDOM($basicsPageDOM, basicsDOMTemplates.teardowned);
+    }
+  });
+
+  // Example Partials
+
+  var PartialsPage = new window.Ractive({
+        el: 'partials-page',
+        template: $('#partials-page').html()
+      }),
+      $partialsPageDOM = $('#example-partials .example-dom'),
+      partialsDOMTemplates = {
+        initial: {
+          html: [
+            '<head>\n',
+            '  ...\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="basics-help">Open the help</button>\n',
+            '  <button id="basics-reset">Reset the example</button>\n\n',
+            '  <rv-require name="help" src="views/help">\n',
+            '    <rv-partial target="title">\n',
+            '      - Partials\n',
+            '    </rv-partial>\n',
+            '    <rv-partial target="content">\n',
+            '      <strong>My awesome content</strong>\n',
+            '    </rv-partial>\n',
+            '  </rv-require>\n\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 1,
+            top: 468,
+            left: 278,
+            html: [
+              'You can use rv-partial tags to include<br />contents in specific parts of the element required.'
+            ].join('')
+          }, {
+            number: 2,
+            top: 120,
+            left: 184,
+            html: [
+              'Click to call the .require() method and<br />load all the rv-require elements<br />with its partials.'
+            ].join('')
+          }]
+        },
+
+        opened: {
+          html: [
+            '<head>\n',
+            '  <link rel="stylesheet" href="views/help.css">\n',
+            '  <script type="text/javascript" src="views/help.js"></script>\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="basics-help">Close the help</button>\n',
+            '  <button id="basics-reset">Reset the example</button>\n\n',
+            '  <rv-require name="help" src="views/help" class="rv-require-loaded" loaded="true">\n',
+            '    <div class="help">\n',
+            '      <h4>HELP - Partials</h4>\n',
+            '      <p>\n',
+            '        Help content:<br>\n',
+            '        <strong>My awesome content</strong>\n',
+            '      </p>\n',
+            '    </div>\n',
+            '  </rv-require>\n\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 3,
+            top: 492,
+            left: 204,
+            html: [
+              'The partials are included in the element.'
+            ].join('')
+          }, {
+            number: 4,
+            top: 120,
+            left: 184,
+            html: [
+              'Click to call the .teardown() method and<br />destroy your Ractive element.'
+            ].join('')
+          }]
+        },
+
+        teardowned: {
+          html: [
+            '<head>\n',
+            '  <link rel="stylesheet" href="views/help.css">\n',
+            '  <script type="text/javascript" src="views/help.js"></script>\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="basics-help">Open the help</button>\n',
+            '  <button id="basics-reset">Reset the example</button>\n\n',
+            '  <rv-require name="help" src="views/help">\n',
+            '    <rv-partial target="title">\n',
+            '      - Partials\n',
+            '    </rv-partial>\n',
+            '    <rv-partial target="content">\n',
+            '      <strong>My awesome content</strong>\n',
+            '    </rv-partial>\n',
+            '  </rv-require>\n\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 5,
+            top: 492,
+            left: 278,
+            html: [
+              'The rv-partial tags are restored.'
+            ].join('')
+          }, {
+            number: 6,
+            top: 120,
+            left: 184,
+            html: [
+              'You can retry the process any times you want.'
+            ].join('')
+          }]
+        }
+      };
+
+  _updateExampleDOM($partialsPageDOM, partialsDOMTemplates.initial);
+
+  $('#partials-reset').click(function() {
+    var opened = $('#partials-help').data('opened') || false;
+
+    if (opened) {
+      PartialsPage.childrenRequire[0].teardown();
+      $('#partials-help').html('Open the help');
+      $('#partials-help').data('opened', false);
+    }
+
+    _updateExampleDOM($partialsPageDOM, partialsDOMTemplates.initial);
+  });
+
+  $('#partials-help').click(function() {
+    var opened = $('#partials-help').data('opened') || false;
+
+    opened = !opened;
+
+    $('#partials-help')
+      .data('opened', opened)
+      .html(opened ? 'Close the help' : 'Open the help');
+
+    if (opened) {
+      PartialsPage.require().then(function() {
+        _updateExampleDOM($partialsPageDOM, partialsDOMTemplates.opened);
+      });
+    }
+    else {
+      PartialsPage.childrenRequire[0].teardown();
+      _updateExampleDOM($partialsPageDOM, partialsDOMTemplates.teardowned);
     }
   });
 

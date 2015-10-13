@@ -80,6 +80,7 @@
 
             <ul>
               <li class="title-2-container"><a class="title-2" href="#the-basics">The basics</a></li>
+              <li class="title-2-container"><a class="title-2" href="#partials">Partials</a></li>
             </ul>
           </li>
           <li class="title-1-container"><a class="title-1" href="#installation">Installation</a></li>
@@ -297,6 +298,122 @@
           </div>
 
           <div class="content-example" id="example-basics-5">
+            <div class="highlight">
+              <pre class="prettyprint">.help {
+  position: absolute;
+  top: 4.2rem;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  border-left: 1px solid #ececec;
+  padding: 1rem;
+  background: white;
+}
+</pre>
+            </div>
+          </div>
+        </div>
+
+        <h3>
+          <a id="partials" class="anchor" href="#partials" aria-hidden="true"><span class="icon-link"></span></a>
+          Partials
+        </h3>
+
+        <nav class="navbar navbar-example">
+          <ul class="navbar-list">
+            <li class="navbar-item"><a class="navbar-link" data-target="example-partials-1">Example</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-partials-2">example.js</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-partials-3">help.html</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-partials-4">help.js</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-partials-5">help.css</a></li>
+          </ul>
+        </nav>
+
+        <div class="container-example" id="example-partials">
+          <div class="content-example" id="example-partials-1">
+
+
+            <div class="example-view">
+
+              <div id="partials-page">
+
+                <h4>Here is a page</h4>
+                <button id="partials-help">Open the help</button><br />
+                <button id="partials-reset">Reset the example</button>
+
+                <rv-require name="help" src="views/help">
+                  <rv-partial target="title">
+                    - Partials
+                  </rv-partial>
+                  <rv-partial target="content">
+                    <strong>My awesome content</strong>
+                  </rv-partial>
+                </rv-require>
+
+              </div>
+
+            </div>
+            <pre class="example-dom prettyprint"></pre>
+
+          </div>
+
+          <div class="content-example" id="example-partials-2">
+            <div class="highlight">
+              <pre class="prettyprint">$('#basics-help').click(function() {
+  var opened = $('#basics-help').data('opened') || false;
+
+  opened = !opened;
+
+  $('#basics-help')
+    .data('opened', opened)
+    .html(opened ? 'Close the help' : 'Open the help');
+
+  if (opened) {
+    BasicsPage.require();
+  }
+  else {
+    BasicsPage.childrenRequire[0].teardown();
+  }
+});</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-partials-3">
+            <div class="highlight">
+              <pre class="prettyprint escaped">&lt;div class="help"&gt;
+
+  &lt;!-- Include your Ractive partials in your view --&gt;
+  &lt;!-- They will be replaced by the content inside rv-partial tags --&gt;
+
+  &lt;h4&gt;HELP {{&gt; title}}&lt;/h4&gt;
+  &lt;p&gt;
+    Help content:&lt;br /&gt;
+    {{&gt; content}}
+  &lt;/p&gt;
+&lt;/div&gt;</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-partials-4">
+            <div class="highlight">
+              <pre class="prettyprint">(function() {
+  'use strict';
+
+  window.Ractive.controller('help', function(component, data, el, config, done) {
+
+    var Help = component({
+      data: data
+    });
+
+    done();
+  });
+
+})();
+</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-partials-5">
             <div class="highlight">
               <pre class="prettyprint">.help {
   position: absolute;
