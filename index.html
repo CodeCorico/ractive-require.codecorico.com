@@ -82,6 +82,7 @@
               <li class="title-2-container"><a class="title-2" href="#the-basics">The basics</a></li>
               <li class="title-2-container"><a class="title-2" href="#partials">Partials</a></li>
               <li class="title-2-container"><a class="title-2" href="#databinding">Databinding</a></li>
+              <li class="title-2-container"><a class="title-2" href="#on-demand">On demand</a></li>
             </ul>
           </li>
           <li class="title-1-container"><a class="title-1" href="#installation">Installation</a></li>
@@ -539,6 +540,96 @@
   margin-top: -1.4rem;
   font-size: 1.4rem;
 }
+</pre>
+            </div>
+          </div>
+        </div>
+
+        <h3>
+          <a id="on-demand" class="anchor" href="#on-demand" aria-hidden="true"><span class="icon-link"></span></a>
+          On demand
+        </h3>
+
+        <nav class="navbar navbar-example">
+          <ul class="navbar-list">
+            <li class="navbar-item"><a class="navbar-link" data-target="example-on-demand-1">Example</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-on-demand-2">example.js</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-on-demand-3">article.html</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-on-demand-4">chat.html</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-on-demand-5">user-profile.html</a></li>
+          </ul>
+        </nav>
+
+        <div class="container-example" id="example-on-demand">
+          <div class="content-example" id="example-on-demand-1">
+
+            <div class="example-view">
+
+              <div id="on-demand-page">
+                <h4>Here is a page</h4>
+                <button id="on-demand-require">Require</button>
+                <button id="on-demand-chat">Require the chat</button>
+                <button id="on-demand-profile">Require the user profile</button><br />
+                <button id="on-demand-reset">Reset the example</button>
+
+                <rv-require name="chat" ondemand="chat" src="views/chat"></rv-require>
+
+                <rv-require name="user-profile" ondemand="profile" src="views/user-profile"></rv-require>
+
+                <rv-require name="article" src="views/article" data-title="Article 1"></rv-require>
+              </div>
+
+            </div>
+            <pre class="example-dom prettyprint"></pre>
+
+          </div>
+
+          <div class="content-example" id="example-on-demand-2">
+            <div class="highlight">
+              <pre class="prettyprint">$('#on-demand-require').click(function() {
+  OnDemandPage.require();
+});
+
+$('#on-demand-chat').click(function() {
+  OnDemandPage.require('chat');
+});
+
+$('#on-demand-profile').click(function() {
+  OnDemandPage.require('profile');
+});
+
+$('#on-demand-reset').click(function() {
+  for (var i = OnDemandPage.childrenRequire.length - 1; i >= 0; i--) {
+    OnDemandPage.childrenRequire[i].teardown();
+  }
+});</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-on-demand-3">
+            <div class="highlight">
+              <pre class="prettyprint"><div class="article">
+  <h4>{{title}}</h4>
+  ...
+</div>
+</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-on-demand-4">
+            <div class="highlight">
+              <pre class="prettyprint"><div class="chat">
+  <h4>Here is the chat</h4>
+</div>
+</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-on-demand-5">
+            <div class="highlight">
+              <pre class="prettyprint"><div class="user-profile">
+  <h4>Here is the user profile</h4>
+</div>
 </pre>
             </div>
           </div>

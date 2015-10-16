@@ -1,0 +1,11 @@
+.chat {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  border-top: 1px solid #ececec;
+  border-left: 1px solid #ececec;
+  padding: 1rem;
+  background: white;
+}

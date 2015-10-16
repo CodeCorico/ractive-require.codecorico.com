@@ -498,7 +498,7 @@ $(function() {
             top: 97,
             left: 454,
             html: [
-              'The "drink" variable is directly passed from the "data-drink" attribute.'
+              'The "drink" variable is<br />directly passed from<br />the "data-drink" attribute.'
             ].join('')
           }, {
             number: 5,
@@ -592,6 +592,230 @@ $(function() {
       DatabindingPage.childrenRequire[0].teardown();
       _updateExampleDOM($databindingPageDOM, databindingDOMTemplates.teardowned);
     }
+  });
+
+  // Example On demand
+
+  var OnDemandPage = new window.Ractive({
+        el: 'on-demand-page',
+        template: $('#on-demand-page').html()
+      }),
+      $OnDemandPageDOM = $('#example-on-demand .example-dom'),
+      OnDemandDOMTemplates = {
+        initial: {
+          html: [
+            '<head>\n',
+            '  ...\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="on-demand-require">Require</button>\n',
+            '  <button id="on-demand-chat">Require the chat</button>\n',
+            '  <button id="on-demand-profile">Require the user profile</button><br />\n',
+            '  <button id="on-demand-reset">Reset the example</button>\n\n',
+            '  <rv-require name="chat" ondemand="chat" src="views/chat">\n',
+            '  </rv-require>\n\n',
+            '  <rv-require name="user-profile" ondemand="profile" src="views/user-profile">\n',
+            '  </rv-require>\n\n',
+            '  <rv-require name="article" src="views/article" data-title="Article 1">\n',
+            '  </rv-require>\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 1,
+            top: 515,
+            left: 224,
+            html: [
+              'Use "ondemand" attribute to require<br />this feature only when it is specified.'
+            ].join('')
+          }, {
+            number: 1,
+            top: 589,
+            left: 293,
+            html: [
+              'Use "ondemand" attribute to require<br />this feature only when it is specified.'
+            ].join('')
+          }, {
+            number: 2,
+            top: 119,
+            left: 142,
+            html: [
+              'Use .require() will not require<br />the "on demand" features.'
+            ].join('')
+          }]
+        },
+
+        require: {
+          html: [
+            '<head>\n',
+            '  <link rel="stylesheet" href="views/article.css">\n',
+            '  <script type="text/javascript" src="views/article.js"></script>\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="on-demand-require">Require</button>\n',
+            '  <button id="on-demand-chat">Require the chat</button>\n',
+            '  <button id="on-demand-profile">Require the user profile</button><br />\n',
+            '  <button id="on-demand-reset">Reset the example</button>\n\n',
+            '  <rv-require name="chat" ondemand="chat" src="views/chat">\n',
+            '  </rv-require>\n\n',
+            '  <rv-require name="user-profile" ondemand="profile" src="views/user-profile">\n',
+            '  </rv-require>\n\n',
+            '  <rv-require name="article" src="views/article" data-title="Article 1" loaded="true" class="rv-require-loaded">\n',
+            '    <div class="article">\n',
+            '      <h4>Article 1</h4>\n',
+            '      ...\n',
+            '    </div>\n',
+            '  </rv-require>\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 3,
+            top: 730,
+            left: 29,
+            html: [
+              'Only the "article" feature has been required<br />and not the "on demand" features.'
+            ].join('')
+          }, {
+            number: 4,
+            top: 119,
+            left: 204,
+            html: [
+              'Use .require(\'chat\') will require only<br />the "on demand" features with the "chat"<br />value.'
+            ].join('')
+          }]
+        },
+
+        chat: {
+          html: [
+            '<head>\n',
+            '  <link rel="stylesheet" href="views/article.css">\n',
+            '  <script type="text/javascript" src="views/article.js"></script>\n',
+            '  <link rel="stylesheet" href="views/chat.css">\n',
+            '  <script type="text/javascript" src="views/chat.js"></script>\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="on-demand-require">Require</button>\n',
+            '  <button id="on-demand-chat">Require the chat</button>\n',
+            '  <button id="on-demand-profile">Require the user profile</button><br />\n',
+            '  <button id="on-demand-reset">Reset the example</button>\n\n',
+            '  <rv-require name="chat" ondemand="chat" src="views/chat" loaded="true" class="rv-require-loaded">\n',
+            '    <div class="chat">\n',
+            '      <h4>Here is the chat</h4>\n',
+            '    </div>\n',
+            '  </rv-require>\n\n',
+            '  <rv-require name="user-profile" ondemand="profile" src="views/user-profile">\n',
+            '  </rv-require>\n\n',
+            '  <rv-require name="article" src="views/article" data-title="Article 1" loaded="true" class="rv-require-loaded">\n',
+            '    <div class="article">\n',
+            '      <h4>Article 1</h4>\n',
+            '      ...\n',
+            '    </div>\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 5,
+            top: 634,
+            left: 29,
+            html: [
+              'Now the "chat" feature is required.'
+            ].join('')
+          }, {
+            number: 6,
+            top: 119,
+            left: 261,
+            html: [
+              'Use .require(\'profile\') will require only<br />the "on demand" features with the "profile"<br />value.'
+            ].join('')
+          }]
+        },
+
+        profile: {
+          html: [
+            '<head>\n',
+            '  <link rel="stylesheet" href="views/article.css">\n',
+            '  <script type="text/javascript" src="views/article.js"></script>\n',
+            '  <link rel="stylesheet" href="views/chat.css">\n',
+            '  <script type="text/javascript" src="views/chat.js"></script>\n',
+            '  <link rel="stylesheet" href="views/user-profile.css">\n',
+            '  <script type="text/javascript" src="views/user-profile.js"></script>\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="on-demand-require">Require</button>\n',
+            '  <button id="on-demand-chat">Require the chat</button>\n',
+            '  <button id="on-demand-profile">Require the user profile</button><br />\n',
+            '  <button id="on-demand-reset">Reset the example</button>\n\n',
+            '  <rv-require name="chat" ondemand="chat" src="views/chat" loaded="true" class="rv-require-loaded">\n',
+            '    <div class="chat">\n',
+            '      <h4>Here is the chat</h4>\n',
+            '    </div>\n',
+            '  </rv-require>\n\n',
+            '  <rv-require name="user-profile" ondemand="profile" src="views/user-profile" loaded="true" class="rv-require-loaded">\n',
+            '    <div class="user-profile">\n',
+            '      <h4>Here is the user profile</h4>\n',
+            '    </div>\n',
+            '  </rv-require>\n\n',
+            '  <rv-require name="article" src="views/article" data-title="Article 1" loaded="true" class="rv-require-loaded">\n',
+            '    <div class="article">\n',
+            '      <h4>Article 1</h4>\n',
+            '      ...\n',
+            '    </div>\n',
+            '  </rv-require>\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 7,
+            top: 802,
+            left: 29,
+            html: [
+              'Now the "user-profile" feature is required.<br />Note that the "name" and the "ondemad" are<br />not required to have the same value.'
+            ].join('')
+          }, {
+            number: 8,
+            top: 143,
+            left: 221,
+            html: [
+              'Teardown every feature and retry the process.'
+            ].join('')
+          }]
+        }
+      };
+
+  _updateExampleDOM($OnDemandPageDOM, OnDemandDOMTemplates.initial);
+
+  $('#on-demand-require').click(function() {
+    OnDemandPage.require().then(function() {
+      $('#on-demand-require').css('display', 'none');
+      $('#on-demand-chat').css('display', 'inline-block');
+      _updateExampleDOM($OnDemandPageDOM, OnDemandDOMTemplates.require);
+    });
+  });
+
+  $('#on-demand-chat').click(function() {
+    OnDemandPage.require('chat').then(function() {
+      $('#on-demand-chat').css('display', 'none');
+      $('#on-demand-profile').css('display', 'inline-block');
+      _updateExampleDOM($OnDemandPageDOM, OnDemandDOMTemplates.chat);
+    });
+  });
+
+  $('#on-demand-profile').click(function() {
+    OnDemandPage.require('profile').then(function() {
+      $('#on-demand-profile').css('display', 'none');
+      _updateExampleDOM($OnDemandPageDOM, OnDemandDOMTemplates.profile);
+    });
+  });
+
+  $('#on-demand-reset').click(function() {
+    for (var i = OnDemandPage.childrenRequire.length - 1; i >= 0; i--) {
+      OnDemandPage.childrenRequire[i].teardown();
+    }
+    _updateExampleDOM($OnDemandPageDOM, OnDemandDOMTemplates.initial);
+    $('#on-demand-chat').css('display', 'none');
+    $('#on-demand-profile').css('display', 'none');
+    $('#on-demand-require').css('display', 'inline-block');
   });
 
   // ----
