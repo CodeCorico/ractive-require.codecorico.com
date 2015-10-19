@@ -1,0 +1,10 @@
+.help-full {
+  position: absolute;
+  top: 4.2rem;
+  right: 0;
+  bottom: 0;
+  width: 50%;
+  border-left: 1px solid #ececec;
+  padding: 1rem;
+  background: white;
+}

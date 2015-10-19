@@ -336,6 +336,10 @@ h6:hover .anchor .icon-link {
   display: none;
 }
 
+#cascading-elements-page {
+  min-height: 186px;
+}
+
 @media (max-width: 1038px) {
   body > .container {
     width: 100% !important;

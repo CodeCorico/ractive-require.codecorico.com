@@ -83,6 +83,7 @@
               <li class="title-2-container"><a class="title-2" href="#partials">Partials</a></li>
               <li class="title-2-container"><a class="title-2" href="#databinding">Databinding</a></li>
               <li class="title-2-container"><a class="title-2" href="#on-demand">On demand</a></li>
+              <li class="title-2-container"><a class="title-2" href="#cascading-elements">Cascading elements</a></li>
             </ul>
           </li>
           <li class="title-1-container"><a class="title-1" href="#installation">Installation</a></li>
@@ -635,6 +636,122 @@ $('#on-demand-reset').click(function() {
           </div>
         </div>
 
+        <h3>
+          <a id="cascading-elements" class="anchor" href="#cascading-elements" aria-hidden="true"><span class="icon-link"></span></a>
+          Cascading elements
+        </h3>
+
+        <nav class="navbar navbar-example">
+          <ul class="navbar-list">
+            <li class="navbar-item"><a class="navbar-link" data-target="example-cascading-elements-1">Example</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-cascading-elements-2">example.js</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-cascading-elements-3">help-full.html</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-cascading-elements-4">help-full.js</a></li>
+            <li class="navbar-item"><a class="navbar-link" data-target="example-cascading-elements-5">article.html</a></li>
+          </ul>
+        </nav>
+
+        <div class="container-example" id="example-cascading-elements">
+          <div class="content-example" id="example-cascading-elements-1">
+
+            <div class="example-view">
+
+              <div id="cascading-elements-page">
+                <h4>Here is a page</h4>
+                <button id="cascading-elements-help">Open the help</button><br />
+                <button id="cascading-elements-reset">Reset the example</button>
+
+                <rv-require
+                  name="help-full"
+                  ondemand="help-full"
+                  src="views/help-full"
+                  data-title="Article from the parent"
+                >
+                  <rv-partial target="content">
+                    <strong>Content from the parent</strong>
+                  </rv-partial>
+                </rv-require>
+              </div>
+
+            </div>
+            <pre class="example-dom prettyprint"></pre>
+
+          </div>
+
+          <div class="content-example" id="example-cascading-elements-2">
+            <div class="highlight">
+              <pre class="prettyprint">$('#cascading-elements-help').click(function() {
+  var opened = $('#cascading-elements-help').data('opened') || false;
+
+  opened = !opened;
+
+  $('#cascading-elements-help')
+    .data('opened', opened)
+    .html(opened ? 'Close the help' : 'Open the help');
+
+  if (opened) {
+
+    // Require only the help-full feature
+
+    CascadingElementsPage.require('help-full');
+  }
+  else {
+    CascadingElementsPage.childrenRequire[0].teardown();
+  }
+});</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-cascading-elements-3">
+            <div class="highlight">
+              <pre class="prettyprint"><div class="help-full">
+  <h4>HELP</h4>
+
+  <!-- The feature src is relative to its own file path -->
+  <rv-require name="article" src="article" data-bind-title="title"></rv-require>
+
+</div>
+</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-cascading-elements-4">
+            <div class="highlight">
+              <pre class="prettyprint">(function() {
+  'use strict';
+
+  window.Ractive.controller('help-full', function(component, data, el, config, done) {
+
+    var HelpFull = component({
+      data: data
+    });
+
+    // Immediatly after its creation,
+    // the feature require its sub-features
+    // and fire done() after
+
+    HelpFull.require().then(function() {
+      done();
+    });
+
+  });
+
+})();
+</pre>
+            </div>
+          </div>
+
+          <div class="content-example" id="example-cascading-elements-5">
+            <div class="highlight">
+              <pre class="prettyprint escaped">&lt;div class="article"&gt;
+  &lt;h4&gt;{{title}}&lt;/h4&gt;
+  ...
+  {{&gt; content}}
+&lt;/div&gt;</pre>;
+            </div>
+          </div>
+        </div>
+
         <h2>
           <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="icon-link"></span></a>
           Installation
@@ -643,7 +760,7 @@ $('#on-demand-reset').click(function() {
         <p>Use the CDN version:</p>
 
         <div class="highlight">
-          <pre class="prettyprint escaped">&lt;script src=&quot;https:&#x2F;&#x2F;cdnjs.cloudflare.com&#x2F;ajax&#x2F;libs&#x2F;ractive-require&#x2F;0.5.0&#x2F;ractive-require.min.js&quot;&gt;&lt;&#x2F;script&gt;</pre>
+          <pre class="prettyprint escaped">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/ractive-require/0.5.0/ractive-require.min.js"&gt;&lt;/script&gt;</pre>
         </div>
 
         <p>

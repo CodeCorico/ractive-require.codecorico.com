@@ -818,6 +818,197 @@ $(function() {
     $('#on-demand-require').css('display', 'inline-block');
   });
 
+  // Cascading elements
+
+  var CascadingElementsPage = new window.Ractive({
+        el: 'cascading-elements-page',
+        template: $('#cascading-elements-page').html()
+      }),
+      $CascadingElementsPageDOM = $('#example-cascading-elements .example-dom'),
+      CascadingElementsDOMTemplates = {
+        initial: {
+          html: [
+            '<head>\n',
+            '  ...\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="partials-help">Open the help</button>\n',
+            '  <button id="partials-reset">Reset the example</button>\n\n',
+            '  <rv-require\n',
+            '    name="help-full"\n',
+            '    ondemand="help-full"\n',
+            '    src="views/help-full"\n',
+            '    data-title="Article from the parent"\n',
+            '  >\n',
+            '    <rv-partial target="content">\n',
+            '      <strong>Content from the parent</strong>\n',
+            '    </rv-partial>\n',
+            '  </rv-require>\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 1,
+            top: 544,
+            left: 226,
+            html: [
+              'The "help-full" feature has its<br />own sub-feature.'
+            ].join('')
+          }, {
+            number: 2,
+            top: 590,
+            left: 94,
+            html: [
+              'The title will be passed to the<br />"help-full" sub-feature.'
+            ].join('')
+          }, {
+            number: 3,
+            top: 665,
+            left: 164,
+            html: [
+              'When a rv-partial is declared<br />it is passed to each cascading child.'
+            ].join('')
+          }, {
+            number: 4,
+            top: 120,
+            left: 184,
+            html: [
+              'Click to call the .require(\'help-full\') method.'
+            ].join('')
+          }]
+        },
+
+        opened: {
+          html: [
+            '<head>\n',
+            '  <link rel="stylesheet" href="views/help-full.css">\n',
+            '  <script type="text/javascript" src="views/help-full.js"></script>\n',
+            '  <link rel="stylesheet" href="views/article.css">\n',
+            '  <script type="text/javascript" src="views/article.js"></script>\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="partials-help">Open the help</button>\n',
+            '  <button id="partials-reset">Reset the example</button>\n\n',
+            '  <rv-require\n',
+            '    name="help-full"\n',
+            '    ondemand="help-full"\n',
+            '    src="views/help-full"\n',
+            '    data-title="Article from the parent"\n\n',
+            '    loaded="true"\n',
+            '    class="rv-require-loaded"\n',
+            '  >\n',
+            '    <div class="help-full">\n',
+            '      <h4>HELP</h4>\n\n',
+            '      <rv-require\n',
+            '        name="article"\n',
+            '        src="/views/article"\n',
+            '        data-bind-title="title"\n\n',
+            '        loaded="true"\n',
+            '        class="rv-require-loaded"\n',
+            '      >\n',
+            '        <div class="article">\n',
+            '          <h4>Article from the parent</h4>\n',
+            '          ... <strong>Content from the parent</strong>\n',
+            '        </div>\n',
+            '      </rv-require>\n\n',
+            '    </div>\n',
+            '  </rv-require>\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 5,
+            top: 928,
+            left: 125,
+            html: [
+              'The actual "title" (given by the parent)<br />is binded to its own child.'
+            ].join('')
+          }, {
+            number: 6,
+            top: 1096,
+            left: 155,
+            html: [
+              'The partial is provided from the cascading parents.'
+            ].join('')
+          }, {
+            number: 7,
+            top: 119,
+            left: 188,
+            html: [
+              'Click to teardown() the "help-full" feature<br />It will automatically teardown its<br />cascading children.'
+            ].join('')
+          }]
+        },
+
+        teardowned: {
+          html: [
+            '<head>\n',
+            '  <link rel="stylesheet" href="views/help-full.css">\n',
+            '  <script type="text/javascript" src="views/help-full.js"></script>\n',
+            '  <link rel="stylesheet" href="views/article.css">\n',
+            '  <script type="text/javascript" src="views/article.js"></script>\n',
+            '</head>\n',
+            '<body>\n',
+            '  <h4>Here is a page</h4>\n',
+            '  <button id="partials-help">Open the help</button>\n',
+            '  <button id="partials-reset">Reset the example</button>\n\n',
+            '  <rv-require\n',
+            '    name="help-full"\n',
+            '    ondemand="help-full"\n',
+            '    src="views/help-full"\n',
+            '    data-title="Article from the parent"\n',
+            '  >\n',
+            '    <rv-partial target="content">\n',
+            '      <strong>Content from the parent</strong>\n',
+            '    </rv-partial>\n',
+            '  </rv-require>\n',
+            '</body>'
+          ].join(''),
+          comments: [{
+            number: 8,
+            top: 120,
+            left: 184,
+            html: [
+              'You can retry the process any times you want.'
+            ].join('')
+          }]
+        }
+      };
+
+  _updateExampleDOM($CascadingElementsPageDOM, CascadingElementsDOMTemplates.initial);
+
+  $('#cascading-elements-help').click(function() {
+    var opened = $('#cascading-elements-help').data('opened') || false;
+
+    opened = !opened;
+
+    $('#cascading-elements-help')
+      .data('opened', opened)
+      .html(opened ? 'Close the help' : 'Open the help');
+
+    if (opened) {
+      CascadingElementsPage.require('help-full').then(function() {
+        _updateExampleDOM($CascadingElementsPageDOM, CascadingElementsDOMTemplates.opened);
+      });
+    }
+    else {
+      CascadingElementsPage.childrenRequire[0].teardown();
+      _updateExampleDOM($CascadingElementsPageDOM, CascadingElementsDOMTemplates.teardowned);
+    }
+  });
+
+  $('#cascading-elements-reset').click(function() {
+    var opened = $('#cascading-elements-help').data('opened') || false;
+
+    if (opened) {
+      CascadingElementsPage.childrenRequire[0].teardown();
+      $('#cascading-elements-help').html('Open the help');
+      $('#cascading-elements-help').data('opened', false);
+    }
+
+    _updateExampleDOM($CascadingElementsPageDOM, CascadingElementsDOMTemplates.initial);
+  });
+
   // ----
 
   $('.container-example').each(function() {
