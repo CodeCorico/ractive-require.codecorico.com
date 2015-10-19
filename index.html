@@ -111,7 +111,6 @@
 
             <ul>
               <li class="title-2-container"><a class="title-2" href="#static-controller">.controller()</a></li>
-              <li class="title-2-container"><a class="title-2" href="#static-firecontroller">.fireController()</a></li>
               <li class="title-2-container"><a class="title-2" href="#static-require">.require()</a></li>
             </ul>
           </li>
@@ -1105,6 +1104,39 @@ Ractive.controller('button', function(Feature, data, el, config, done) {
           <p class="variable-desc-2">
             The callback function to finish the initialization of the controller. The <code>.then()</code> of the parent's <code>.require()</code> will be fired.
           </p>
+
+        </div>
+
+        <h3>
+          <a id="static-require" class="anchor" href="#static-require" aria-hidden="true"><span class="icon-link"></span></a>
+          .require()
+        </h3>
+
+        <div class="technical-description">
+
+          <h4>Ractive.require( file )</h4>
+
+          <p>
+            Inject a <code>.js</code> or <code>.css</code> file in the <code>head</code> tag. It returns a promise that it is fired when the file is completely loaded. If the file is already loaded, the promise is directly fired.
+          </p>
+
+          <h5>file <span>string</span></h5>
+
+          <p class="variable-desc">The file to inject in the head. The total path will be used to knows if the file is already loaded.</p>
+
+          <h4>Ractive.require( name, file )</h4>
+
+          <p>
+            Inject a <code>.js</code> or <code>.css</code> file in the <code>head</code> tag. It returns a promise that it is fired when the file is completely loaded. If the file is already loaded, the promise is directly fired.
+          </p>
+
+          <h5>name <span>string</span></h5>
+
+          <p class="variable-desc">The name of the file. Instead of the file path, this name will be used to knows if the file is already loaded.</p>
+
+          <h5>file <span>string</span></h5>
+
+          <p class="variable-desc">The file to inject in the head.</p>
 
         </div>
       </div>
