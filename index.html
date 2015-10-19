@@ -107,7 +107,7 @@
             </ul>
           </li>
           <li class="title-1-container">
-            <a class="title-1" href="#new-methods">Static methods</a>
+            <a class="title-1" href="#static-methods">Static methods</a>
 
             <ul>
               <li class="title-2-container"><a class="title-2" href="#static-controller">.controller()</a></li>
@@ -116,7 +116,7 @@
             </ul>
           </li>
           <li class="title-1-container">
-            <a class="title-1" href="#new-methods">Instance attributes</a>
+            <a class="title-1" href="#instance-attributes">Instance attributes</a>
 
             <ul>
               <li class="title-2-container"><a class="title-2" href="#attributes-parentrequire">.parentRequire</a></li>
@@ -124,11 +124,13 @@
             </ul>
           </li>
           <li class="title-1-container">
-            <a class="title-1" href="#new-methods">Instance methods</a>
+            <a class="title-1" href="#instance-methods">Instance methods</a>
 
             <ul>
               <li class="title-2-container"><a class="title-2" href="#instance-require">.require()</a></li>
+              <li class="title-2-container"><a class="title-2" href="#instance-findparents">.findParents()</a></li>
               <li class="title-2-container"><a class="title-2" href="#instance-findparent">.findParent()</a></li>
+              <li class="title-2-container"><a class="title-2" href="#instance-findchildren">.findChildren()</a></li>
               <li class="title-2-container"><a class="title-2" href="#instance-findchild">.findChild()</a></li>
             </ul>
           </li>
@@ -1050,6 +1052,61 @@ Ractive.controller('button', function(Feature, data, el, config, done) {
 
         <p>Your <code>&lt;rv-require&gt;</code> is reseted but still on the DOM. So you can re-use <code>.require()</code> on its parent to re-fire its controller.</p>
 
+        <h2>
+          <a id="static-methods" class="anchor" href="#static-methods" aria-hidden="true"><span class="icon-link"></span></a>
+          Static methods
+        </h2>
+
+        <h3>
+          <a id="static-controller" class="anchor" href="#static-controller" aria-hidden="true"><span class="icon-link"></span></a>
+          .controller()
+        </h3>
+
+        <div class="technical-description">
+
+          <h4>Ractive.controller( name, controllerFunc )</h4>
+
+          <p>Register a controller for a specific feature. When the feature will be required, the controller will be fire.</p>
+
+          <h5>name <span>string</span></h5>
+
+          <p class="variable-desc">The name of the feature.</p>
+
+          <h5>controllerFunc( component, data, el, config, done ) <span>function</span></h5>
+
+          <p class="variable-desc">The controller function. It is fired each time the specific feature is required.</p>
+
+          <h6>component( config )<span>function</span></h6>
+
+          <p class="variable-desc-2">
+            Create and return a Ractive view (<a href="http://docs.ractivejs.org/latest/new-ractive" target="_blank">new Ractive()</a>) plugged on the actual feature DOM. It provide automatically the native <code>el</code>, <code>template</code> and <code>partials</code> configurations. It also create the parents/children links and add <a href="#instance-attributes">Ractive-Require instance attributes and methods</a>.
+          </p>
+
+          <h6>data <span>object</span></h6>
+
+          <p class="variable-desc-2">
+            Data configuration getted from the <code>data-*</code> and <code>data-bind-*</code> attributes.
+          </p>
+
+          <h6>el <span>DOM element</span></h6>
+
+          <p class="variable-desc-2">
+            rv-require DOM element.
+          </p>
+
+          <h6>config <span>object</span></h6>
+
+          <p class="variable-desc-2">
+            It contains the HTML (string) template and the partials.
+          </p>
+
+          <h6>done( ) <span>function</span></h6>
+
+          <p class="variable-desc-2">
+            The callback function to finish the initialization of the controller. The <code>.then()</code> of the parent's <code>.require()</code> will be fired.
+          </p>
+
+        </div>
       </div>
     </div>
 

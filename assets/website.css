@@ -222,6 +222,55 @@ h6:hover .anchor .icon-link {
   position: absolute;
 }
 
+.technical-description {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+  border: none;
+}
+
+.technical-description h4 {
+  font-weight: 600;
+  font-size: 2.6rem;
+}
+
+.technical-description h5 {
+  font-weight: 600;
+  font-size: 1.8rem;
+  padding-left: 3rem;
+}
+
+.technical-description h6 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  padding-left: 6rem;
+}
+
+.technical-description h5 span, .technical-description h6 span {
+  font-weight: 400;
+  background: #bbb;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  font-size: 1.6rem;
+  margin-left: 1rem;
+  border-radius: 3px;
+}
+
+.technical-description p {
+  font-size: 1.8rem;
+}
+
+.technical-description .variable-desc {
+  padding-left: 3rem;
+}
+
+.technical-description .variable-desc-2 {
+  padding-left: 6rem;
+}
+
 .example-view {
   position: relative;
   border: 1px solid #ececec;
