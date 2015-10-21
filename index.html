@@ -809,7 +809,7 @@ ractive.require().then(function() {
 
         <p><code>.require()</code> is a promise thats provide a <code>.then()</code> method to callback after the end of the process.</p>
 
-        <h3 class="h-no-top">
+        <h3>
           <a id="the-cycle-of-a-feature" class="anchor" href="the-cycle-of-a-feature" aria-hidden="true"><span class="icon-link"></span></a>
           The cycle of a require
         </h3>
@@ -1056,7 +1056,7 @@ Ractive.controller('button', function(Feature, data, el, config, done) {
           Static methods
         </h2>
 
-        <h3>
+        <h3 class="h-no-top">
           <a id="static-controller" class="anchor" href="#static-controller" aria-hidden="true"><span class="icon-link"></span></a>
           .controller()
         </h3>
@@ -1139,6 +1139,171 @@ Ractive.controller('button', function(Feature, data, el, config, done) {
           <p class="variable-desc">The file to inject in the head.</p>
 
         </div>
+
+        <h2>
+          <a id="instance-attributes" class="anchor" href="#instance-attributes" aria-hidden="true"><span class="icon-link"></span></a>
+          Instance attributes
+        </h2>
+
+        <h3 class="h-no-top">
+          <a id="attributes-parentrequire" class="anchor" href="#attributes-parentrequire" aria-hidden="true"><span class="icon-link"></span></a>
+          .parentRequire
+        </h3>
+
+        <div class="technical-description">
+
+          <h4>ractive.parentsRequire <span>ractive object</span></h4>
+
+          <p>
+            Each <code>ractive</code> instance required by its parent owns its reference by using <code>ractive.parentsRequire</code>.
+          </p>
+
+        </div>
+
+        <h3>
+          <a id="attributes-childrenrequire" class="anchor" href="#attributes-childrenrequire" aria-hidden="true"><span class="icon-link"></span></a>
+          .childrenRequire
+        </h3>
+
+        <div class="technical-description">
+
+          <h4>ractive.parentsRequire <span>array</span></h4>
+
+          <p>
+            When a <code>ractive</code> instance require its children, it became owner of this property with all of its children required in it.
+          </p>
+
+        </div>
+
+        <h2>
+          <a id="instance-methods" class="anchor" href="#instance-methods" aria-hidden="true"><span class="icon-link"></span></a>
+          Instance methods
+        </h2>
+
+        <h3 class="h-no-top">
+          <a id="instance-require" class="anchor" href="#instance-require" aria-hidden="true"><span class="icon-link"></span></a>
+          .require()
+        </h3>
+
+        <div class="technical-description">
+
+          <h4>ractive.require( )</h4>
+
+          <p>Require all of its sub <code>rv-require</code> DOM elements except those with a <code>ondemand</code> attribute.</p>
+          <p>This method returns a promise that it is fired when the elements are totally loaded.</p>
+          <p>The <code>ractive.require()</code> process steps:</p>
+          <ol>
+            <li>
+              Inject the CSS file of the feature in the <code>head</code> (Unless the <code>no-css="true"</code> attribute is given in the <code>rv-require</code> child element). Wait the end of the file load to go to the next step.
+            </li>
+            <li>
+              Inject the JavaScript file of the feature in the <code>head</code> (Unless the <code>no-script="true"</code> attribute is given in the <code>rv-require</code> child element). Wait the end of the file load and execution to go to the next step.
+            </li>
+            <li>
+              Get the HTML template from the URL (xhr) and keep it in cache.
+            </li>
+            <li>
+              Call all the registered controllers from the <code>rv-require</code> name.
+            </li>
+            <li>
+              Fire the promise returned.
+            </li>
+          </ol>
+
+          <h4>ractive.require( name )</h4>
+
+          <p>Instead of the method without a name, this one require all of its sub <code>rv-require</code> DOM elements with the <code>ondemand</code> attribute filled by the <code>name</code>.</p>
+
+          <h5>name <span>string</span></h5>
+
+          <p class="variable-desc">The name of the <code>ondemand</code> children.</p>
+
+        </div>
+
+        <h3>
+          <a id="instance-findparents" class="anchor" href="#instance-findparents" aria-hidden="true"><span class="icon-link"></span></a>
+          .findParents()
+        </h3>
+
+        <div class="technical-description">
+
+          <h4>ractive.findParents( attribute, value )</h4>
+
+          <p>Return an <code>array</code> filled by all of the <code>ractive</code> parents searched through the cascading ancestors matching the filter.</p>
+
+          <h5>attribute <span>string</span></h5>
+
+          <p class="variable-desc">The attribute name to filter the parents.</p>
+
+          <h5>value <span>string</span></h5>
+
+          <p class="variable-desc">The attribute value to filter the parents.</p>
+
+        </div>
+
+        <h3>
+          <a id="instance-findparent" class="anchor" href="#instance-findparent" aria-hidden="true"><span class="icon-link"></span></a>
+          .findParent()
+        </h3>
+
+        <div class="technical-description">
+
+          <h4>ractive.findParent( attribute, value )</h4>
+
+          <p>Return the <code>ractive</code> parent searched through the cascading ancestors matching the filter.</p>
+
+          <h5>attribute <span>string</span></h5>
+
+          <p class="variable-desc">The attribute name to filter the parents.</p>
+
+          <h5>value <span>string</span></h5>
+
+          <p class="variable-desc">The attribute value to filter the parents.</p>
+
+        </div>
+
+        <h3>
+          <a id="instance-findchildren" class="anchor" href="#instance-findchildren" aria-hidden="true"><span class="icon-link"></span></a>
+          .findChildren()
+        </h3>
+
+        <div class="technical-description">
+
+          <h4>ractive.findChildren( attribute, value )</h4>
+
+          <p>Return an <code>array</code> filled by all of the <code>ractive</code> children searched through the cascading children matching the filter.</p>
+
+          <h5>attribute <span>string</span></h5>
+
+          <p class="variable-desc">The attribute name to filter the children.</p>
+
+          <h5>value <span>string</span></h5>
+
+          <p class="variable-desc">The attribute value to filter the children.</p>
+
+        </div>
+
+        <h3>
+          <a id="instance-findchild" class="anchor" href="#instance-findchild" aria-hidden="true"><span class="icon-link"></span></a>
+          .findChild()
+        </h3>
+
+        <div class="technical-description">
+
+          <h4>ractive.findChild( attribute, value )</h4>
+
+          <p>Return the <code>ractive</code> child searched through the cascading children matching the filter.</p>
+
+          <h5>attribute <span>string</span></h5>
+
+          <p class="variable-desc">The attribute name to filter the children.</p>
+
+          <h5>value <span>string</span></h5>
+
+          <p class="variable-desc">The attribute value to filter the children.</p>
+
+        </div>
+
       </div>
     </div>
 
