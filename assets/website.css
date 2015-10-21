@@ -190,6 +190,10 @@ h2 .anchor, h3 .anchor {
   top: 4rem;
 }
 
+#content h2:first-child .anchor {
+  top: 2rem;
+}
+
 .h-no-top .anchor {
   top: 0;
 }
