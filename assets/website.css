@@ -67,6 +67,7 @@ rv-require:not(.rv-require-loaded), rv-partial {
 
 #content {
   margin-left: 26%;
+  padding-bottom: 3rem;
 }
 
 #content h2, #content h3 {
@@ -249,7 +250,7 @@ h6:hover .anchor .icon-link {
   padding-left: 6rem;
 }
 
-.technical-description h5 span, .technical-description h6 span {
+.technical-description h4 span, .technical-description h5 span, .technical-description h6 span {
   font-weight: 400;
   background: #bbb;
   color: white;
@@ -261,6 +262,10 @@ h6:hover .anchor .icon-link {
 
 .technical-description p {
   font-size: 1.8rem;
+}
+
+.technical-description li {
+  font-size: 1.4rem;
 }
 
 .technical-description .variable-desc {
