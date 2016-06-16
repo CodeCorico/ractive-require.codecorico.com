@@ -98,7 +98,8 @@
               <li class="title-2-container"><a class="title-2" href="#html-only">HTML only</a></li>
               <li class="title-2-container"><a class="title-2" href="#on-demand">On demand</a></li>
               <li class="title-2-container"><a class="title-2" href="#double-databinding">Double databinding</a></li>
-              <li class="title-2-container"><a class="title-2" href="#partials">Partials</a></li>
+              <li class="title-2-container"><a class="title-2" href="#events">Events</a></li>
+              <li class="title-2-container"><a class="title-2" href="#use-partials">Partials</a></li>
               <li class="title-2-container"><a class="title-2" href="#cascading-requires">Cascading requires</a></li>
               <li class="title-2-container"><a class="title-2" href="#scopes">Scopes</a></li>
               <li class="title-2-container"><a class="title-2" href="#paths">Paths</a></li>
@@ -774,7 +775,7 @@ $('#on-demand-reset').click(function() {
         </h2>
 
         <h3 class="h-no-top">
-          <a id="require-a-feature" class="anchor" href="require-a-feature" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="require-a-feature" class="anchor" href="#require-a-feature" aria-hidden="true"><span class="icon-link"></span></a>
           Require a feature
         </h3>
 
@@ -810,7 +811,7 @@ ractive.require().then(function() {
         <p><code>.require()</code> is a promise thats provide a <code>.then()</code> method to callback after the end of the process.</p>
 
         <h3>
-          <a id="the-cycle-of-a-feature" class="anchor" href="the-cycle-of-a-feature" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="the-cycle-of-a-feature" class="anchor" href="#the-cycle-of-a-feature" aria-hidden="true"><span class="icon-link"></span></a>
           The cycle of a require
         </h3>
 
@@ -830,7 +831,7 @@ ractive.require().then(function() {
         <p>The HTML template will still be a Mustache template with data-binding, but for now, it's just a string.</p>
 
         <h3>
-          <a id="control-a-feature" class="anchor" href="control-a-feature" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="control-a-feature" class="anchor" href="#control-a-feature" aria-hidden="true"><span class="icon-link"></span></a>
           Control a feature
         </h3>
 
@@ -857,7 +858,7 @@ Ractive.controller('button', function(component, data, el, config, done) {
         <p>Now your feature is totally applied in the DOM and you can control it!</p>
 
         <h3>
-          <a id="cache" class="anchor" href="cache" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="cache" class="anchor" href="#cache" aria-hidden="true"><span class="icon-link"></span></a>
           Cache
         </h3>
 
@@ -871,7 +872,7 @@ Ractive.controller('button', function(component, data, el, config, done) {
         <p>The second <em>button</em> does not reload the JavasScript and CSS files in the head and it re-uses the template content previously loaded.</p>
 
         <h3>
-          <a id="html-only" class="anchor" href="html-only" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="html-only" class="anchor" href="#html-only" aria-hidden="true"><span class="icon-link"></span></a>
           HTML only
         </h3>
 
@@ -883,7 +884,7 @@ Ractive.controller('button', function(component, data, el, config, done) {
         </div>
 
         <h3>
-          <a id="on-demand" class="anchor" href="on-demand" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="on-demand" class="anchor" href="#on-demand" aria-hidden="true"><span class="icon-link"></span></a>
           On demand
         </h3>
 
@@ -902,7 +903,7 @@ Ractive.controller('button', function(component, data, el, config, done) {
         <p>With the same ondemand attribute value, you can make groups of features loaded together.</p>
 
         <h3>
-          <a id="double-databinding" class="anchor" href="double-databinding" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="double-databinding" class="anchor" href="#double-databinding" aria-hidden="true"><span class="icon-link"></span></a>
           Double databinding
         </h3>
 
@@ -921,7 +922,7 @@ Ractive.controller('button', function(component, data, el, config, done) {
         </div>
 
         <div class="highlight">
-          <pre class="prettyprint">Ractive.controller('button', function(Feature, data, el, config, done) {
+          <pre class="prettyprint">Ractive.controller('button', function(component, data, el, config, done) {
 
   console.log(data.id);
 
@@ -940,7 +941,44 @@ Ractive.controller('button', function(component, data, el, config, done) {
         </div>
 
         <h3>
-          <a id="partials" class="anchor" href="partials" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="events" class="anchor" href="#events" aria-hidden="true"><span class="icon-link"></span></a>
+          Events
+        </h3>
+
+        <p>A component can listen its parent events and its parent can do the same with its children:</p>
+
+        <ul>
+          <li>Use <code>data-on-*</code> to bind the child event to a parent event (named <code>*</code>).</li>
+          <li>Use <code>data-listen-*</code> to bind the parent event to the child event (named <code>*</code>).</li>
+          <li>Optionnaly you can bind many events this these syntaxes: <code>data-on-*-*-*-...</code> and <code>data-listen-*-*-*-...</code></li>
+        </ul>
+
+        <div class="highlight">
+          <pre class="prettyprint"><rv-require name="button" src="components/button" data-on-click="buttonClick"></rv-require>
+<rv-require name="button" src="components/button" data-listen-parentclick="parentEvent"></rv-require></pre>
+        </div>
+
+        <div class="highlight">
+          <pre class="prettyprint">Ractive.controller('button', function(component, data, el, config, done) {
+
+  // The "button" component can fire the "click" event when the user clicks on it.
+  // So when the user click on the first button, the "buttonClick" event is fired too.
+  // Then it fires the "parentEvent" that fire the "parentclick" of the second button.
+
+  var ractive = component({
+    data: data
+  });
+
+  ractive.on('buttonClick', function() {
+
+    ractive.fire('parentEvent');
+
+  });
+});</pre>
+        </div>
+
+        <h3>
+          <a id="use-partials" class="anchor" href="#partials" aria-hidden="true"><span class="icon-link"></span></a>
           Partials
         </h3>
 
@@ -980,7 +1018,7 @@ Ractive.controller('button', function(component, data, el, config, done) {
         </div>
 
         <h3>
-          <a id="cascading-requires" class="anchor" href="cascading-requires" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="cascading-requires" class="anchor" href="#cascading-requires" aria-hidden="true"><span class="icon-link"></span></a>
           Cascading requires
         </h3>
 
@@ -992,7 +1030,7 @@ Ractive.controller('button', function(component, data, el, config, done) {
         <p>The sub-feature already contain its parents partials.</p>
 
         <h3>
-          <a id="scopes" class="anchor" href="scopes" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="scopes" class="anchor" href="#scopes" aria-hidden="true"><span class="icon-link"></span></a>
           Scopes
         </h3>
 
@@ -1006,7 +1044,7 @@ Ractive.controller('button', function(component, data, el, config, done) {
         </ul>
 
         <h3>
-          <a id="paths" class="anchor" href="#-paths" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="paths" class="anchor" href="#paths" aria-hidden="true"><span class="icon-link"></span></a>
           Paths
         </h3>
 
@@ -1028,7 +1066,7 @@ Ractive.controller('button', function(component, data, el, config, done) {
         </div>
 
         <h3>
-          <a id="teardown" class="anchor" href="teardown" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="teardown" class="anchor" href="#teardown" aria-hidden="true"><span class="icon-link"></span></a>
           Teardown
         </h3>
 
@@ -1037,7 +1075,7 @@ Ractive.controller('button', function(component, data, el, config, done) {
         <p>Your <code>&lt;rv-require&gt;</code> is reseted but still in the DOM. So you can re-use <code>.require()</code> on its parent to re-fire its controller.</p>
 
         <h3>
-          <a id="require-a-file-directly" class="anchor" href="require-a-file-directly" aria-hidden="true"><span class="icon-link"></span></a>
+          <a id="require-a-file-directly" class="anchor" href="#require-a-file-directly" aria-hidden="true"><span class="icon-link"></span></a>
           Require a file directly
         </h3>
 
